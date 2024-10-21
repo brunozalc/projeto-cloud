@@ -1,4 +1,11 @@
 fastapi[standard]
 uvicorn
-pydantic
-starlette
+pydantic[email]
+sqlalchemy
+psycopg2-binary
+passlib[bcrypt]
+httpx
+python-jose[cryptography]
+python-dotenv
+gunicorn
+pytest
