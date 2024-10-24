@@ -9,3 +9,6 @@ python-jose[cryptography]
 python-dotenv
 gunicorn
 pytest
+mkdocs
+mkdocs-terminal
+mkdocs-git-revision-date-plugin
