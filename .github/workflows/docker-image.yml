@@ -1,11 +1,10 @@
-
 name: build and push latest docker image
 
 on:
   push:
     branches:
-      - main 
-  workflow_dispatch: 
+      - main
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -28,23 +27,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: extract docker metadata (tags, labels)
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/apicloud
-
       - name: build and push docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/apicloud:latest
+          labels: |
+            org.opencontainers.image.source=${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/apicloud:cache
           cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/apicloud:cache,mode=max
 
-
       - name: logout from docker hub and finalize
         run: docker logout
+
