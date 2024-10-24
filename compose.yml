@@ -6,11 +6,6 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 8000:8000
-    environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/dogfacts      
-      - SECRET_KEY=zJsD2ve8DGT5iWiYZmQjGqXlZPXP+p2DNwTjhpGtN4E=
-      - ALGORITHM=HS256
-      - ACCESS_TOKEN_EXPIRE_MINUTES=60
     depends_on:
       - db
     networks:
