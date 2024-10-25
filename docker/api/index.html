@@ -8,7 +8,8 @@
     <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.6.0">
      
      
-    <link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
+    
+    <link rel="canonical" href="https://brunozalc.github.io/projeto-cloud/docker/api/"><link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="../../img/android-chrome-512x512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png" />
 <link rel="shortcut icon" type="image/png" sizes="48x48" href="../../img/favicon.ico" />
@@ -28,8 +29,8 @@
 <link href="../../css/theme.css" rel="stylesheet">
 <link href="../../css/theme.tile_grid.css" rel="stylesheet">
 <link href="../../css/theme.footer.css" rel="stylesheet">
-<!-- gruvbox_dark color palette -->
-<link href="../../css/palettes/gruvbox_dark.css" rel="stylesheet">
+<!-- dark color palette -->
+<link href="../../css/palettes/dark.css" rel="stylesheet">
 
 <!-- page layout -->
 <style>
@@ -54,10 +55,7 @@
 
 
 
-    
-    <link href="../../css/mkapi-common.css" rel="stylesheet"> 
-    <link href="../../css/mkapi-material.css" rel="stylesheet"> 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">  
+     
     
     
 
@@ -76,8 +74,6 @@
     
     
     
-    <script src="../../javascript/mkapi.js"></script>
-    
     <script src="../../search/main.js"></script>
     
 
@@ -87,7 +83,7 @@
 <body class="terminal"><div class="container">
     <div class="terminal-nav">
         <header class="terminal-logo">
-            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="/" class="no-style">Projeto Cloud 2024.2</a></div>
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://brunozalc.github.io/projeto-cloud/" class="no-style">Projeto Cloud 2024.2</a></div>
         </header>
         
         <nav class="terminal-menu">
@@ -297,51 +293,51 @@
 <p>url: <code>/registrar</code></p>
 <p>método aceito: <code>POST</code></p>
 <p><strong>exemplo de requisição:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user@string.com&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;email&quot;: &quot;user@string.com&quot;,
+  &quot;password&quot;: &quot;string&quot;
+}
+</code></pre>
 <p><strong>exemplo de resposta:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;seu_token_jwt&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;token_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bearer&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre><code class="language-json">{
+  &quot;access_token&quot;: &quot;seu_token_jwt&quot;,
+  &quot;token_type&quot;: &quot;bearer&quot;
+}
+</code></pre>
 <h1 id="2-endpoint-de-login">2. endpoint de login</h1>
 <p>url: <code>/login</code></p>
 <p>método aceito: <code>POST</code></p>
 <p><strong>exemplo de requisição:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;password&quot;: &quot;string&quot;
+}
+</code></pre>
 <p><strong>exemplo de resposta:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;seu_token_jwt&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;token_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bearer&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre><code class="language-json">{
+  &quot;access_token&quot;: &quot;seu_token_jwt&quot;,
+  &quot;token_type&quot;: &quot;bearer&quot;
+}
+</code></pre>
 <h1 id="3-endpoint-de-consulta-a-fatos-caninos">3. endpoint de consulta a fatos caninos</h1>
 <p>url: <code>/consulta</code></p>
 <p>método aceito: <code>GET</code></p>
 <p><strong>exemplo de requisição (com token):</strong></p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span><span class="s1">&#39;GET&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s1">&#39;http://localhost:8000/consultar&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;accept: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: seu_token_jwt&#39;</span>
-</code></pre></div>
+<pre><code class="language-bash">curl -X 'GET' \
+  'http://localhost:8000/consultar' \
+  -H 'accept: application/json' \
+  -H 'Authorization: seu_token_jwt'
+</code></pre>
 <p><strong>exemplo de resposta:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;facts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="s2">&quot;fato canino 1&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;fato canino 2&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;fato canino 3&quot;</span>
-<span class="w">  </span><span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre><code class="language-json">{
+  &quot;facts&quot;: [
+    &quot;fato canino 1&quot;,
+    &quot;fato canino 2&quot;,
+    &quot;fato canino 3&quot;
+  ]
+}
+</code></pre>
 <p>caso você esteja testando a API através da documentação interativa, é necessário que você:</p>
 <ol>
 <li>copie o <em>token</em> gerado por alguma das requisições anteriores</li>

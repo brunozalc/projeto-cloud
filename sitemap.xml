@@ -1,3 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://brunozalc.github.io/projeto-cloud/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://brunozalc.github.io/projeto-cloud/aws/aws/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://brunozalc.github.io/projeto-cloud/docker/api/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://brunozalc.github.io/projeto-cloud/docker/uso/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
 </urlset>
