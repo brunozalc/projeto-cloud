@@ -1,4 +1,5 @@
 site_name: Projeto Cloud 2024.2
+site_url: https://brunozalc.github.io/projeto-cloud/
 repo_url: https://github.com/brunozalc/projeto-cloud
 edit_uri: edit/main/docs/
 nav:
@@ -10,7 +11,7 @@ nav:
     - visão geral: aws/aws.md
 theme: 
   name: terminal
-  palette: gruvbox_dark
+  palette: dark
   features:
     - footer.prev_next
     - navigation.side.indexes
@@ -20,4 +21,3 @@ theme:
 plugins:
   - search
   - git-revision-date
-  - mkapi
