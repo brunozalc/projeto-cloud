@@ -16,21 +16,24 @@ baixe o arquivo `compose.yml`:
 
 <a href="https://raw.githubusercontent.com/brunozalc/projeto-cloud/main/compose.yml" id="downloadLink">compose.yml</a>
 
-<script>
-document.getElementById('downloadLink').addEventListener('click', function(event) {
-    event.preventDefault();
-    const url = this.href;
-    const fileName = 'compose.yml';
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('downloadLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        const url = this.href;
+        const fileName = 'compose.yml';
 
-    fetch(url)
-    .then(response => response.blob())
-    .then(blob => {
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = fileName;
-        link.click();
-    })
-    .catch(() => alert('falha ao baixar o arquivo.'));
+        fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+            window.URL.revokeObjectURL(link.href);
+        })
+        .catch(() => alert('Falha ao baixar o arquivo.'));
+    });
 });
 </script>
 
@@ -51,3 +54,11 @@ docker compose up
 espere alguns segundos, e a API ficará disponível em `http://localhost:8080`
 
 você pode ver a documentação dos *endpoints* da API em `http://localhost:8080/docs`, além de testá-los interativamente!
+
+# finalização
+
+para finalizar a execução da API, rode no terminal:
+
+```bash
+docker compose dowm
+```

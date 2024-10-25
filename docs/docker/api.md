@@ -85,3 +85,10 @@ curl -X 'GET' \
 1. copie o *token* gerado por alguma das requisições anteriores
 2. aperte o botão "Authorize", localizado no canto superior direito da página
 3. insira seu *token* e faça *login*
+
+# vídeo demonstrando os endpoints
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Gw8IJozeXlk" 
+    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
