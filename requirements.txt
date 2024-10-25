@@ -12,3 +12,4 @@ pytest
 mkdocs
 mkdocs-terminal
 mkdocs-git-revision-date-plugin
+mkapi

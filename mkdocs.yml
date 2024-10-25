@@ -2,22 +2,22 @@ site_name: Projeto Cloud 2024.2
 repo_url: https://github.com/brunozalc/projeto-cloud
 edit_uri: edit/main/docs/
 nav:
-  - Home: index.md 
-  - Docker: 
-    - Download e uso: docker/uso.md
+  - home: index.md 
+  - docker:
+    - download e uso: docker/uso.md
     - API: docker/api.md 
-    - Dockerfile: docker/dockerfile.md
-  - AWS:
-    - Visão geral: aws/aws.md
+  - aws:
+    - visão geral: aws/aws.md
 theme: 
   name: terminal
   palette: gruvbox_dark
   features:
     - footer.prev_next
+    - navigation.side.indexes
     - navigation.side.toc.hide
-    - navigation.top.search_button.hide
     - revision.date 
     - revision.history
 plugins:
   - search
   - git-revision-date
+  - mkapi
