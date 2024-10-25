@@ -297,7 +297,25 @@
 </ul>
 <h2 id="instalacao">instalação</h2>
 <p>baixe o arquivo <code>compose.yml</code>:</p>
-<p><a href="../../assets/compose.yml">compose.yml</a></p>
+<p><a href="https://raw.githubusercontent.com/brunozalc/projeto-cloud/main/compose.yml" id="downloadLink">compose.yml</a></p>
+<script>
+document.getElementById('downloadLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    const url = this.href;
+    const fileName = 'compose.yml';
+
+    fetch(url)
+    .then(response => response.blob())
+    .then(blob => {
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+    })
+    .catch(() => alert('falha ao baixar o arquivo.'));
+});
+</script>
+
 <p>ou clone o repositório do projeto no seu computador:</p>
 <pre><code class="language-bash">git clone https://github.com/brunozalc/projeto-cloud.git
 </code></pre>
