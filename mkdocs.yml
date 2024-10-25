@@ -18,6 +18,7 @@ theme:
     - navigation.side.toc.hide
     - revision.date 
     - revision.history
+  custom_dir: overrides
 plugins:
   - search
   - git-revision-date

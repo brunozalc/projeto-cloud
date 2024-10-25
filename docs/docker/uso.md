@@ -14,7 +14,25 @@ para rodar o projeto, você irá precisar de:
 
 baixe o arquivo `compose.yml`:
 
-[compose.yml](../assets/compose.yml)
+<a href="https://raw.githubusercontent.com/brunozalc/projeto-cloud/main/compose.yml" id="downloadLink">compose.yml</a>
+
+<script>
+document.getElementById('downloadLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    const url = this.href;
+    const fileName = 'compose.yml';
+
+    fetch(url)
+    .then(response => response.blob())
+    .then(blob => {
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+    })
+    .catch(() => alert('falha ao baixar o arquivo.'));
+});
+</script>
 
 ou clone o repositório do projeto no seu computador:
 
