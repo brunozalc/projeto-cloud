@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projeto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projeto
+  template:
+    metadata:
+      labels:
+        app: projeto
+    spec:
+      containers:
+        - name: projeto
+          image: brunozalc/apicloud:latest
+          ports:
+            - containerPort: 8000
+          # Add this readiness probe to ensure the container is ready
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          # Add initialization delay to wait for database
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8000
+            failureThreshold: 30
+            periodSeconds: 10
