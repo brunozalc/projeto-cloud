@@ -9,7 +9,7 @@
      
      
     
-    <link rel="canonical" href="https://brunozalc.github.io/projeto-cloud/aws/aws/"><link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
+    <link rel="canonical" href="https://brunozalc.github.io/projeto-cloud/aws/deploy/"><link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="../../img/android-chrome-512x512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png" />
 <link rel="shortcut icon" type="image/png" sizes="48x48" href="../../img/favicon.ico" />
@@ -19,7 +19,7 @@
 
     
  
-<title>visão geral - Projeto Cloud 2024.2</title>
+<title>deploy usando kubernetes - Projeto Cloud 2024.2</title>
 
 
 <link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
@@ -264,7 +264,7 @@
         
         <span class="
 
-    terminal-mkdocs-side-nav-item--active">visão geral</span>
+    terminal-mkdocs-side-nav-item--active">deploy usando kubernetes</span>
     
     </li>
             
@@ -285,6 +285,143 @@
     
     
 
+<section id="mkdocs-terminal-content">
+    <h1 id="hosteamento-da-api-na-aws-usando-eks">hosteamento da API na AWS usando EKS</h1>
+<p>o deploy da API criada na primeira etapa foi feito através da AWS, utilizando-se o EKS (Elastic Kubernetes Service).</p>
+<h2 id="infraestrutura-utilizada">infraestrutura utilizada</h2>
+<ul>
+<li><strong>Amazon EKS</strong>: serviço gerenciado de Kubernetes</li>
+<li><strong>EC2</strong>: instâncias para os nodes do cluster</li>
+<li><strong>ELB</strong>: <em>load-balancer</em> para distribuição de tráfego</li>
+<li><strong>IAM</strong>: gerenciamento de permissões do cluster</li>
+</ul>
+<h2 id="processo-de-implementacao">processo de implementação</h2>
+<h3 id="1-preparacao-do-ambiente">1. preparação do ambiente</h3>
+<pre><code class="language-bash"># criação do cluster
+eksctl create cluster \
+      --name dogfacts \
+      --region us-east-1 \
+      --node-type t3.small \
+      --nodes 2 \
+      --nodes-min 1 \
+      --nodes-max 3 \
+      --managed
+</code></pre>
+<h3 id="2-deploy-da-aplicacao">2. deploy da aplicação</h3>
+<p>a aplicação foi implantada usando o arquivo <code>api-deploy.yaml</code>:</p>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projeto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projeto
+  template:
+    metadata:
+      labels:
+        app: projeto
+    spec:
+      containers:
+        - name: projeto
+          image: brunozalc/apicloud:latest
+          ports:
+            - containerPort: 8000
+          # readiness test
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          # wait for database
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8000
+            failureThreshold: 30
+            periodSeconds: 10
+</code></pre>
+<h3 id="3-configuracao-do-banco-de-dados">3. configuração do banco de dados</h3>
+<p>o <code>postgres</code> também foi inicializado através de um arquivo <code>postgres-deploy.yaml</code>:</p>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+            - secretRef:
+                name: postgres-secret
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgres
+                - -d
+                - dogfacts
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 5
+</code></pre>
+<h3 id="4-exposicao-do-servico">4. exposição do serviço</h3>
+<p>o <code>postgres</code> foi exposto através de um serviço do tipo <code>ClusterIP</code>, na porta <code>5432</code></p>
+<p>a API foi exposta através de um LoadBalancer:</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: projeto
+spec:
+  type: LoadBalancer
+  selector:
+    app: projeto
+  ports:
+    - port: 8000
+      targetPort: 8000
+</code></pre>
+<h2 id="comandos-posteriores">comandos posteriores</h2>
+<pre><code class="language-bash"># checa que os pods estão em execução
+kubectl get pods
+
+# verifica os serviços (postgres e API)
+kubectl get services
+
+# logs do deployment da API
+kubectl logs deployment/projeto
+</code></pre>
+<h2 id="medidas-de-seguranca">medidas de segurança</h2>
+<ul>
+<li>conta da AWS segura com MFA</li>
+<li>cluster em VPC isolada</li>
+<li><em>roles</em> do IAM com permissões necessárias</li>
+<li><em>secrets</em> para credenciais do banco de dados</li>
+<li><em>network policies</em> para isolamento de recursos</li>
+</ul>
+<h2 id="demonstracao">demonstração</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kp1-KOJTn48"
+    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+</iframe>
+</section>
+
 <section id="mkdocs-terminal-after-content">
     
 </section>
@@ -293,7 +430,7 @@
 <aside>
     <p>
         <small>
-            <i>Page last updated 2024-10-24. See revision history on <a href="https://github.com/brunozalc/projeto-cloud/commits/main/docs/aws/aws.md">GitHub</a>.</i>
+            <i>Page last updated 2024-11-01. See revision history on <a href="https://github.com/brunozalc/projeto-cloud/commits/main/docs/aws/deploy.md">GitHub</a>.</i>
         </small>
     </p>
 </aside>
