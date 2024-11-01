@@ -3,20 +3,20 @@ site_url: https://brunozalc.github.io/projeto-cloud/
 repo_url: https://github.com/brunozalc/projeto-cloud
 edit_uri: edit/main/docs/
 nav:
-  - home: index.md 
+  - home: index.md
   - docker:
     - download e uso: docker/uso.md
-    - API: docker/api.md 
+    - API: docker/api.md
   - aws:
-    - visão geral: aws/aws.md
-theme: 
+    - deploy usando kubernetes: aws/deploy.md
+theme:
   name: terminal
   palette: dark
   features:
     - footer.prev_next
     - navigation.side.indexes
     - navigation.side.toc.hide
-    - revision.date 
+    - revision.date
     - revision.history
   custom_dir: overrides
 plugins:
