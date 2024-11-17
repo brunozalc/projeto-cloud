@@ -11,6 +11,8 @@ o deploy da API criada na primeira etapa foi feito através da AWS, utilizando-s
 
 ## processo de implementação
 
+você pode baixar os arquivos `.yaml` de deploy <a href="https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Fbrunozalc%2Fprojeto-cloud%2Ftree%2Fmain%2Fk8s" target="_blank">aqui</a>.
+
 ### 1. preparação do ambiente
 
 ```bash
